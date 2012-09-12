@@ -1,0 +1,328 @@
+body {font-family: Arial, Helvetica, sans-serif; font-size:12px; color:#000000; margin: 0 0 0 0; padding:0px}
+a, td, tr, table, li, ul, p, input, select, option {font-family: Arial, Helvetica, sans-serif; font-size:12px; color:#000000  }
+
+.username {color:#95b3fc; font-weight:bold; font-size:16px; padding-right:15px}
+.app_title {font-size:18px; color:#fff; font-weight:bold; padding-right:15px}
+.identify {color: #000; padding-right:15px; cursor:pointer; font-weight:bold; text-decoration:none; }
+.identify:hover {color:#00f; padding-right:15px; cursor:pointer; font-weight:bold; text-decoration:underline; }
+.menu_links {color: #000; padding-left:15px; cursor:pointer; text-decoration:none; }
+.menu_links:hover {color:#00f; padding-left:15px; cursor:pointer; text-decoration:underline; }
+
+.bold3 {font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-style: normal; color: #2f2f2f; background-color: #FFFFFF; font-weight: bold; }
+.bottomline {background-color: #FFFFFF; border-bottom: 1px solid #d1d1d1; font-weight: bold;}
+.topline {background-color: #FFFFFF; border-top: 1px solid #d1d1d1; font-weight: bold;}
+.colcaption {background-color: #FFFFFF; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #d1d1d1; font-weight: bold;}
+
+.body_top { background-color: #fff;}
+
+/* Home */
+#dHomeTop {
+    width: 835px;
+    height: 129px;
+    background: url(iconos/bg_remedi.png) no-repeat top;
+    margin-left:auto;
+    margin-right:auto;
+}
+#dHomeCenter {
+    width: 835px;
+    height: 520px;
+    background: url(iconos/bg_logo.png) no-repeat top;
+    margin-left:auto;
+    margin-right:auto;
+}
+#dHomeBottom {
+    width: 835px;
+    height: 71px;
+    background: url(iconos/bg_imgmed.png) no-repeat top;
+    margin-left:auto;
+    margin-right:auto;
+}
+#dLogin {
+    width: 300px;
+    height: 170px;
+    background: url(iconos/bg_login.png) no-repeat top;
+    background-position: 0 150px;
+    margin-left:300px;
+    padding-top:150px;
+}
+.login_error {
+    color: #cc0000;
+}
+.bold {
+    font-weight:bold;
+}
+.buttons {
+    border:0;
+    color:white;
+    cursor:pointer;
+    height:20px;
+    padding-left:10px;
+    padding-right:10px;
+    background-color:#333;
+    font-size:10px;
+    font-weight: bold;
+}
+.buttons:hover {
+    color:white;
+    background-color:#444;
+}
+
+/* Calendarios */
+.calendar_dia_nombre {
+    padding: 2px;
+    text-align: right;
+    width: 22px;
+    background-color: #A1E0F2;
+}
+.calendar_dia {
+    padding: 2px;
+    text-align: right;
+    width: 22px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.calendar_dia_hover {
+    padding: 2px;
+    text-align: right;
+    width: 22px;
+    background-color: red;
+    color: #f5f5f5;
+    cursor: pointer;
+}
+.calendar_dia_busy {
+    padding: 2px;
+    text-align: right;
+    width: 22px;
+    background-color: #0000cc;
+    color: #fff;
+    cursor: pointer;
+}
+.calendar_dia_busy_hover {
+    padding: 2px;
+    text-align: right;
+    width: 22px;
+    background-color: #00cc00;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Estudios */
+.estudios_text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+    padding-right: 5px;
+    text-align: right;
+}
+.estudios_urgente {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+    padding-left: 10px;
+    text-align: left;
+    background-color: #ffff00;
+    color: #f00;
+    font-weight:bold;
+}
+.estudios_id {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+    color: #f00;
+    font-weight:bold;
+}
+.estudios_value {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+    color: #00c;
+}
+
+/* Plantillas */
+#admin_plantillas td {
+    padding:3px;
+}
+#admin_plantillas_radio td {
+    padding:0;
+}
+#admin_plantillas_plantillas td {
+    padding:0;
+}
+#admin_plantillas_categorias td {
+    padding:0;
+}
+
+/* Disponibilidad */
+.inf_nodisp {background-color:#eeeeee;}
+.inf_disp {background-color:#0078ae;}
+.disp_radio_rowsel {
+    background-color: #79c9ec; cursor:pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+}
+.disp_radio {
+    cursor:pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+}
+.disp_colcaption {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #d1d1d1;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+}
+.disp_topline {
+    background-color: #FFFFFF;
+    border-top: 1px solid #d1d1d1;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+}
+
+/* Mensajes */
+.mensajes_cab {
+    background-color: #eee;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+    padding: 5px;
+}
+.mensajes_body {
+    background-color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+    padding: 5px;
+    overflow: auto;
+    height: 125px;
+}
+
+/* Visor DICOM*/
+.dicom_serie {
+    background-color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10px;
+    padding: 5px;
+    border: 1px solid #79c9ec;
+    width: 120px;
+    height: auto;
+}
+.dicom_serie_selected {
+    background-color: #79c9ec;
+}
+.dicom_serie_separator {
+    height: 5px;
+}
+.dicom_serie_info {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:9px;
+    width: 90px;
+    height: 25px;
+}
+.dicom_serie_ficheros {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:9px;
+    width: 30px;
+    text-align: right;
+    margin-left: 90px;
+    margin-top: -18px;
+    height: 15px;
+}
+.dicom_draw_area {
+    padding:3px;
+    border: 1px solid #79c9ec;
+    cursor:pointer;
+}
+.dicom_draw_area_sel {
+    background-color: #79c9ec;
+}
+.dicom_info_hint {
+    height:15px;
+    background-color: #ffff00;
+    font-size:11px;
+    border:1px solid #cccc00;
+    padding:4px 10px;
+    color:#000;
+
+    -moz-border-radius:4px; -moz-border-radius-bottomleft:0; -moz-border-radius-topleft:0; -moz-box-shadow:0 0 6px #ddd;
+    -webkit-border-radius:4px; -webkit-border-bottom-left-radius:0; -webkit-border-top-left-radius:0; -webkit-box-shadow:0 0 6px #ddd;
+}
+.dicom_info_urgente {
+    height:18px;
+    background-color: #79c9ec;
+    font-size:11px;
+    border:1px solid #009999;
+    padding:4px 10px;
+    color:#000;
+
+    -moz-border-radius:4px; -moz-border-radius-bottomleft:0; -moz-border-radius-topleft:0; -moz-box-shadow:0 0 6px #ddd;
+    -webkit-border-radius:4px; -webkit-border-bottom-left-radius:0; -webkit-border-top-left-radius:0; -webkit-box-shadow:0 0 6px #ddd;
+}
+
+#dDicom_canvasZoom {
+    position:absolute;
+    display:none;
+    cursor:pointer;
+    border:1px solid #009999;
+    background-color: #ccffff;
+    width: 150px;
+    height: 150px;
+}
+
+
+/* Informes del cliente */
+.informes_caption {
+    background-color: #009999;
+    font-size:12px;
+    font-weight: bold;
+    color: #fff;
+    border-bottom: 2px solid #006666;
+    padding: 2px;
+}
+.informes_totales {
+    background-color: #79c9ec;
+    font-size:12px;
+    font-weight: bold;
+    padding: 2px;
+}
+.informes_subtotales {
+    background-color: #ccffff;
+    font-size:11px;
+    font-weight: bold;
+    padding: 2px;
+}
+.informes_text {
+    font-size:10px;
+    padding: 2px;
+}
+.informes_text_bold {
+    font-size:10px;
+    padding: 2px;
+    font-weight: bold;
+}
+.informes_rowsel {
+    background-color: #009999;
+}
+.informes_bold {
+    font-size:12px;
+    font-weight: bold;
+}
+.informes_foot_level_1 {
+    padding: 3px;
+    font-size:11px;
+    font-weight: bold;
+    background-color: #009999;
+    border-bottom: 2px solid #006666;
+}
+.informes_cap_level_1 {
+    padding: 3px;
+    font-size:11px;
+    font-weight: bold;
+    background-color: #009999;
+    border-top: 2px solid #006666;
+}
+.informes_cap_level_2 {
+    padding: 1px;
+    font-size:11px;
+    font-weight: bold;
+    background-color: #ccffff;
+}
+.informes_cap_level_3 {
+    font-size:10px;
+    background-color: #fff;
+}

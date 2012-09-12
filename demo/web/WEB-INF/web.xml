@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+           version="2.5">
+
+    <display-name>Vincomobile Demo web privada</display-name>
+
+    <listener>
+        <listener-class>com.befasoft.common.servlet.SessionManager</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>confloader</servlet-name>
+        <servlet-class>com.vincomobile.servlets.WebConfLoader</servlet-class>
+        <load-on-startup>1</load-on-startup>
+        <init-param>
+            <param-name>LOG4J</param-name>
+            <param-value>WEB-INF/conf/log4j.properties</param-value>
+        </init-param>
+        <init-param>
+            <param-name>LOG4J_FILE</param-name>
+            <param-value>demo</param-value>
+        </init-param>
+        <init-param>
+            <param-name>APP_NAME</param-name>
+            <param-value>Vincomobile Demo web privada</param-value>
+        </init-param>
+    </servlet>
+
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+</web-app>

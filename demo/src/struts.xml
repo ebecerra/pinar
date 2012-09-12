@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <package name="default" namespace="/" extends="struts-default,json-default">
+
+        <interceptors>
+            <interceptor name="loginInterceptor" class="com.vincomobile.interceptors.WebInterceptor"/>
+            <interceptor-stack name="all-default">
+                <interceptor-ref name="loginInterceptor" />
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="all-default" />
+
+        <global-results>
+            <result name="login">login.jsp</result>
+            <result name="Exception">error.jsp</result>
+            <result name="index" type="redirectAction">Index</result>
+            <result name="logout" type="redirectAction">Login</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="Exception"/>
+        </global-exception-mappings>
+
+        <!-- Acciones del core -->
+        <action name="Password" class="com.befasoft.common.actions.PasswordAction">
+            <result type="json">
+                <param name="root">
+                    actionResponse
+                </param>
+            </result>
+        </action>
+
+        <action name="Parametros" class="com.befasoft.common.actions.ParametrosAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+        </action>
+
+        <action name="Perfiles" class="com.befasoft.common.actions.PerfilesAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+            <result name="allMenusTree" type="json">
+                <param name="root">
+                    allMenusTree
+                </param>
+            </result>
+        </action>
+
+        <action name="Usuarios" class="com.befasoft.common.actions.UsuariosAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+            <result type="json" name="user">
+                <param name="root">
+                    login_info
+                </param>
+            </result>
+            <result type="json" name="mobile">
+                <param name="root">
+                    bodyResult
+                </param>
+                <param name="callbackParameter">callback</param>
+            </result>
+        </action>
+
+        <action name="Usuarios_tipos" class="com.befasoft.common.actions.Usuarios_tiposAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+        </action>
+
+        <action name="Log" class="com.befasoft.common.actions.LogAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+        </action>
+
+        <action name="Lookups" class="com.befasoft.common.actions.LookupsAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+        </action>
+
+        <action name="Lookups_values" class="com.befasoft.common.actions.Lookups_valuesAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+        </action>
+
+        <action name="Usuarios_log" class="com.befasoft.common.actions.Usuarios_logAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+        </action>
+
+        <action name="Usuarios_log_legend" class="com.befasoft.common.actions.Usuarios_log_legendAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+        </action>
+
+        <action name="Filemanager" class="com.befasoft.common.actions.FilemanagerAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+        </action>
+
+        <action name="KeepAlive" class="com.befasoft.common.actions.KeepAliveAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+            </result>
+        </action>
+
+        <action name="BaseAction" class="com.befasoft.common.actions.BaseAction">
+            <result type="json">
+                <param name="root">
+                    actionResponse
+                </param>
+            </result>
+        </action>
+
+        <action name="DBSincro" class="com.befasoft.common.actions.DBSincroAction">
+            <result type="json">
+                <param name="root">
+                    bodyResult
+                </param>
+                <param name="callbackParameter">callback</param>
+            </result>
+        </action>
+
+        <!-- Acciones propias de la aplicacion -->
+        <action name="Index" class="com.vincomobile.actions.IndexAction">
+            <result>site.jsp</result>
+        </action>
+
+        <action name="Login" class="com.vincomobile.actions.LoginAction">
+            <result type="json">
+                <param name="root">
+                    actionResponse
+                </param>
+            </result>
+            <result type="json" name="mobile">
+                <param name="root">
+                    actionResponse
+                </param>
+                <param name="callbackParameter">callback</param>
+            </result>
+        </action>
+
+    </package>
+
+</struts>

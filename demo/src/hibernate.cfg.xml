@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/offline</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">daniel</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- configuration pool via c3p0 -->
+        <property name="hibernate.c3p0.acquire_increment">3</property>
+        <property name="hibernate.c3p0.idle_test_period">3</property>
+        <property name="hibernate.c3p0.max_size">80</property>
+        <property name="hibernate.c3p0.max_statements">0</property>
+        <property name="hibernate.c3p0.min_size">10</property>
+        <property name="hibernate.c3p0.timeout">10</property>
+
+        <!-- configuration log -->
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.use_sql_comments">true</property>
+
+        <!-- Se incluya la persistencia commun a todos los proyectos -->
+        <mapping class="com.befasoft.common.model.appbs.APPBS_APLICACIONES"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_CAMPOS"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_LOG"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_MENU"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_MENU_PERFILES"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_PARAMETROS"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_PARAMETROS_VALORES"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_PERFILES"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_TABLAS"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_USUARIOS"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_USUARIOS_TIPOS"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_USUARIOS_HIST_CLAVES"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_USUARIOS_LOG"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_USUARIOS_LOG_LEGEND"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_USUARIOS_PERFILES"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_LOOKUPS"/>
+        <mapping class="com.befasoft.common.model.appbs.APPBS_LOOKUPS_VALUES"/>
+
+        <!-- Persistencia commun a todos los proyectos (Extendida)-->
+        <mapping class="com.befasoft.common.model.appbs.APPEX_IDIOMAS"/>
+        <mapping class="com.befasoft.common.model.appbs.APPEX_PAISES"/>
+        <mapping class="com.befasoft.common.model.appbs.APPEX_TRADUCCIONES"/>
+
+        <!-- Se incluya la persistencia de las clases propia del proyecto -->
+        <mapping class="com.vincomobile.model.appdb.ARTICULOS"/>
+        <mapping class="com.vincomobile.model.appdb.ARTICULOS_FOTOS"/>
+        <mapping class="com.vincomobile.model.appdb.ARTICULOS_DESCRIP"/>
+        <mapping class="com.vincomobile.model.appdb.CLIENTES"/>
+        <mapping class="com.vincomobile.model.appdb.CLIENTES_DIRECCIONES"/>
+        <mapping class="com.vincomobile.model.appdb.CLIENTES_CONTACTOS"/>
+        <mapping class="com.vincomobile.model.appdb.IVA"/>
+        <mapping class="com.vincomobile.model.appdb.MOBILE_VERSION"/>
+        <mapping class="com.vincomobile.model.appdb.MOBILE_VERSION_CLIENTES"/>
+        <mapping class="com.vincomobile.model.appdb.MONEDAS"/>
+        <mapping class="com.vincomobile.model.appdb.PEDIDOS"/>
+        <mapping class="com.vincomobile.model.appdb.PEDIDOS_LINEAS"/>
+        <mapping class="com.vincomobile.model.appdb.PEDIDOS_ORIGEN"/>
+        <mapping class="com.vincomobile.model.appdb.VENDEDORES"/>
+
+    </session-factory>
+</hibernate-configuration>
