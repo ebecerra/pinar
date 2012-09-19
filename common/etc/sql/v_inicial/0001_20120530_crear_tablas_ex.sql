@@ -1,0 +1,193 @@
+CREATE TABLE `APPEX_PAISES` (
+  `ID_PAIS` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id. del pais',
+  `NOMBRE` varchar(45) CHARACTER SET latin1 NOT NULL COMMENT 'Nombre',
+  `ISO_CODE_2` varchar(2) DEFAULT NULL COMMENT 'Codigo ISO 2',
+  `ISO_CODE_3` varchar(3) DEFAULT NULL COMMENT 'Codigo ISO 3',
+  `ACTIVO` varchar(45) DEFAULT NULL COMMENT 'Indica si esta activo',
+  `G_CODE` varchar(100) DEFAULT NULL COMMENT 'Codigo asignado por Google Maps',
+  `GEOLOCALIZACION` varchar(100) DEFAULT NULL COMMENT 'Coordenadas del pais',
+  PRIMARY KEY (`ID_PAIS`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Paises';
+
+CREATE TABLE `APPEX_COMUNIDADES` (
+  `ID_COMUNIDAD` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id. de la comunidad',
+  `ID_PAIS` int(10) unsigned NOT NULL COMMENT 'Id. del pais',
+  `NOMBRE` varchar(100) NOT NULL COMMENT 'Nombre',
+  `G_CODE` varchar(45) DEFAULT NULL COMMENT 'Codigo asignado por Google Maps',
+  PRIMARY KEY (`ID_COMUNIDAD`),
+  KEY `fk_APPEX_COMUNIDADES_1` (`ID_PAIS`),
+  CONSTRAINT `fk_APPEX_COMUNIDADES_1` FOREIGN KEY (`ID_PAIS`) REFERENCES `APPEX_PAISES` (`ID_PAIS`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='Comunidades / Regiones';
+
+CREATE TABLE `APPEX_PROVINCIAS` (
+  `ID_PAIS` int(10) unsigned NOT NULL COMMENT 'Id. del pais',
+  `ID_PROVINCIA` int(10) unsigned NOT NULL COMMENT 'Id. de la provincia',
+  `ID_COMUNIDAD` int(11) unsigned DEFAULT NULL,
+  `NOMBRE` varchar(45) CHARACTER SET latin1 NOT NULL COMMENT 'Nombre',
+  `CP_PREFIX` varchar(5) DEFAULT NULL COMMENT 'Prefijo de los codigos postales',
+  `G_CODE` varchar(100) DEFAULT NULL COMMENT 'Codigo asignado por Google Maps',
+  PRIMARY KEY (`ID_PAIS`,`ID_PROVINCIA`),
+  KEY `fk_APPEX_PROVINCIAS_1` (`ID_PAIS`),
+  KEY `fk_APPEX_PROVINCIAS_2` (`ID_PAIS`,`ID_COMUNIDAD`),
+  CONSTRAINT `fk_APPEX_PROVINCIAS_1` FOREIGN KEY (`ID_PAIS`) REFERENCES `APPEX_PAISES` (`ID_PAIS`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_APPEX_PROVINCIAS_2` FOREIGN KEY (`ID_PAIS`, `ID_COMUNIDAD`) REFERENCES `APPEX_COMUNIDADES` (`ID_PAIS`, `ID_COMUNIDAD`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Provincias';
+
+CREATE TABLE `APPEX_IDIOMAS` (
+  `ID_IDIOMA` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Codigo del idioma',
+  `NOMBRE` varchar(30) NOT NULL DEFAULT '' COMMENT 'Nombre',
+  `ABREVIATURA` char(3) NOT NULL DEFAULT '' COMMENT 'Abreviatura',
+  `ISO_2` char(2) NOT NULL DEFAULT '' COMMENT 'Codigo ISO 2',
+  `ISO_3` char(3) NOT NULL DEFAULT '' COMMENT 'Codigo ISO 3',
+  `ACTIVO` bit(1) DEFAULT NULL COMMENT 'Indica si esta activo',
+  `LOGO` varchar(45) DEFAULT NULL COMMENT 'Logo de idioma',
+  PRIMARY KEY (`ID_IDIOMA`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Idiomas';
+
+CREATE TABLE `APPEX_TRADUCCIONES` (
+  `ID_IDIOMA` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Codigo del idioma',
+  `ID_TABLA` int(11) NOT NULL DEFAULT '0' COMMENT 'Codigo de la tabla',
+  `ROWKEY` varchar(100) NOT NULL DEFAULT '' COMMENT 'Llave de la fila',
+  `TEXTO` text NOT NULL COMMENT 'Traduccion',
+  PRIMARY KEY (`ID_IDIOMA`,`ID_TABLA`,`ROWKEY`),
+  KEY `fk_APPEX_TRADUCCIONES_2` (`ID_TABLA`),
+  CONSTRAINT `fk_APPEX_TRADUCCIONES_1` FOREIGN KEY (`ID_IDIOMA`) REFERENCES `APPEX_IDIOMAS` (`ID_IDIOMA`),
+  CONSTRAINT `fk_APPEX_TRADUCCIONES_2` FOREIGN KEY (`ID_TABLA`) REFERENCES `APPBS_TABLAS` (`ID_TABLA`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Traducciones de la aplicacion';
+
+CREATE TABLE `APPEX_BANCOS` (
+  `ID_BANCO` varchar(4) CHARACTER SET latin1 NOT NULL COMMENT 'Id. del banco',
+  `NOMBRE` varchar(100) CHARACTER SET latin1 NOT NULL COMMENT 'Nombre',
+  `ACTIVO` char(1) CHARACTER SET latin1 NOT NULL COMMENT 'Activo (S/N)',
+  PRIMARY KEY (`ID_BANCO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Bancos y cajas';
+
+CREATE TABLE `APPEX_CUENTAS_BANCARIAS` (
+  `ID_CUENTA` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id. de la cuenta',
+  `ENTIDAD` varchar(4) CHARACTER SET latin1 NOT NULL DEFAULT '0' COMMENT 'Entidad',
+  `SUCURSAL` varchar(4) CHARACTER SET latin1 NOT NULL DEFAULT '0' COMMENT 'Sucursal',
+  `DC` varchar(2) CHARACTER SET latin1 NOT NULL DEFAULT '0' COMMENT 'Digito de control',
+  `CUENTA` varchar(45) CHARACTER SET latin1 NOT NULL DEFAULT '0' COMMENT 'Cuenta',
+  `IBAN` varchar(60) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Numero IBAN',
+  `NOMBRE` varchar(45) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Descripcion de la cuenta',
+  `ACTIVA` bit(1) NOT NULL COMMENT 'Indica si esta activa',
+  PRIMARY KEY (`ID_CUENTA`),
+  KEY `FK_CUENTAS_BANCARIAS_2` (`ENTIDAD`),
+  KEY `fk_APPEX_CUENTAS_BANCARIAS_1` (`ENTIDAD`),
+  CONSTRAINT `fk_APPEX_CUENTAS_BANCARIAS_1` FOREIGN KEY (`ENTIDAD`) REFERENCES `APPEX_BANCOS` (`ID_BANCO`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COMMENT='Cuentas bancarias';
+
+CREATE TABLE `APPEX_CLIENTES` (
+  `ID_CLIENTE` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id. del cliente',
+  `NOMBRE` varchar(100) CHARACTER SET latin1 NOT NULL COMMENT 'Nombre',
+  `RAZON_SOCIAL` varchar(100) DEFAULT NULL COMMENT 'Razon social',
+  `CIF` varchar(20) CHARACTER SET latin1 NOT NULL COMMENT 'CIF',
+  `EMAIL` varchar(100) CHARACTER SET latin1 NOT NULL COMMENT 'Email de contacto',
+  `TELEFONO` varchar(45) CHARACTER SET latin1 NOT NULL COMMENT 'Telefono',
+  `MOVIL` varchar(45) CHARACTER SET latin1 NOT NULL COMMENT 'Movil',
+  `ACTIVO` char(1) CHARACTER SET latin1 NOT NULL COMMENT 'Activo (S/N)',
+  `INT_PARAM_1` int(11) DEFAULT NULL COMMENT 'Parametro entero 1',
+  `INT_PARAM_2` int(11) DEFAULT NULL COMMENT 'Parametro entero 2',
+  `INT_PARAM_3` int(11) DEFAULT NULL COMMENT 'Parametro entero 3',
+  `INT_PARAM_4` int(11) DEFAULT NULL COMMENT 'Parametro entero 4',
+  `STR_PARAM_1` varchar(100) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Parametro cadena 1',
+  `STR_PARAM_2` varchar(100) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Parametro cadena 2',
+  `STR_PARAM_3` varchar(100) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Parametro cadena 3',
+  `STR_PARAM_4` varchar(100) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Parametro cadena 4',
+  PRIMARY KEY (`ID_CLIENTE`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Clientes';
+
+CREATE TABLE `APPEX_CONTACTOS` (
+  `ID_CONTACTO` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id. del contacto',
+  `NOMBRE` varchar(45) CHARACTER SET latin1 NOT NULL COMMENT 'Nombre',
+  `TELEFONO` varchar(45) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Telefono',
+  `MOVIL` varchar(45) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Movil',
+  `FAX` varchar(45) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Fax',
+  `EMAIL` varchar(45) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Correo electronico',
+  `OBSERVACIONES` varchar(2000) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Observaciones',
+  `ACTIVO` char(1) CHARACTER SET latin1 NOT NULL COMMENT 'Indica si esta activo',
+  PRIMARY KEY (`ID_CONTACTO`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='Contactos';
+
+CREATE TABLE `APPEX_DIRECCIONES` (
+  `ID_DIRECCION` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id. de la direccion',
+  `ID_PAIS` int(10) unsigned NOT NULL COMMENT 'Id. del pais',
+  `ID_PROVINCIA` int(10) unsigned NOT NULL COMMENT 'Id. de la provincia',
+  `DIRECCION` varchar(200) CHARACTER SET latin1 NOT NULL COMMENT 'Direccion',
+  `POBLACION` varchar(45) CHARACTER SET latin1 NOT NULL COMMENT 'Poblacion',
+  `CP` varchar(20) CHARACTER SET latin1 NOT NULL COMMENT 'Codigo postal',
+  `OBSERVACIONES` varchar(200) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Observaciones',
+  `ACTIVA` char(1) CHARACTER SET latin1 NOT NULL COMMENT 'Indica si la direccion esta activa',
+  `FACTURACION` char(1) CHARACTER SET latin1 NOT NULL COMMENT 'Indica si es direccion de facturacion',
+  `FISCAL` char(1) CHARACTER SET latin1 NOT NULL COMMENT 'Indica si es direccion fiscal',
+  `ENVIO` char(1) CHARACTER SET latin1 NOT NULL COMMENT 'Indica si es direccion de envio',
+  `PRINCIPAL` char(1) CHARACTER SET latin1 NOT NULL COMMENT 'Indica si es la direccion principal',
+  PRIMARY KEY (`ID_DIRECCION`),
+  KEY `FK_DIRECCIONES_1` (`ID_PAIS`,`ID_PROVINCIA`),
+  KEY `fk_APPEX_DIRECCIONES_1` (`ID_PAIS`,`ID_PROVINCIA`),
+  CONSTRAINT `fk_APPEX_DIRECCIONES_1` FOREIGN KEY (`ID_PAIS`, `ID_PROVINCIA`) REFERENCES `APPEX_PROVINCIAS` (`ID_PAIS`, `ID_PROVINCIA`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='Direcciones';
+
+CREATE TABLE `APPEX_IVA` (
+  `ID_IVA` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id. del IVA',
+  `NOMBRE` varchar(45) CHARACTER SET latin1 NOT NULL COMMENT 'Nombre',
+  `VALOR` double NOT NULL COMMENT 'Valor (%)',
+  `RECARGO` double DEFAULT NULL COMMENT 'Recargo de equivalencia (%)',
+  PRIMARY KEY (`ID_IVA`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Iva';
+
+CREATE TABLE `APPEX_DISTRIBUIDORES` (
+  `ID_DISTRIBUIDOR` int(10) unsigned NOT NULL COMMENT 'Id. del distribuidor',
+  `NOMBRE` varchar(100) NOT NULL COMMENT 'Nombre',
+  `DESCRIPCION` varchar(200) DEFAULT NULL COMMENT 'Descripcion',
+  `ACTIVO` bit(1) NOT NULL COMMENT 'Indica si esta activo',
+  PRIMARY KEY (`ID_DISTRIBUIDOR`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Distribuidores de aplicaciones';
+
+CREATE TABLE `APPEX_LICENCIA` (
+  `ID_LICENCIA` int(11) unsigned NOT NULL COMMENT 'Id. de la licencia',
+  `ID_DISTRIBUIDOR` int(10) unsigned NOT NULL COMMENT 'Id. del distribuidor',
+  `ID_CLIENTE` int(11) unsigned NOT NULL COMMENT 'Id. del cliente',
+  `ID_APLICACION` varchar(10) NOT NULL COMMENT 'Id. de la aplicacion',
+  `FECHA_INICIO` date NOT NULL COMMENT 'Fecha de inicio',
+  `FECHA_FINAL` date NOT NULL COMMENT 'Fecha de terminacion',
+  `FECHA_ACTUALIZACION` date DEFAULT NULL COMMENT 'Fecha de la ultima actualizacion',
+  `TRIAL_TIEMPO` int(11) NOT NULL COMMENT 'Tiempo de prueba (dias)',
+  `TRIAL_TERMINADO` bit(1) NOT NULL COMMENT 'Indica si ya termino el tiempo de pruebas',
+  `ACTIVA` bit(1) NOT NULL COMMENT 'Indica si la licencia esta activa',
+  `HASH_CODE` varchar(45) NOT NULL COMMENT 'Codio Hash para validar la integridad de la licencia',
+  `HASH_MODULO` varchar(1000) NOT NULL COMMENT 'Modulo de la llave publica',
+  `HASH_EXPONENTE` varchar(1000) NOT NULL COMMENT 'Exponente de la llave publica',
+  `HASH_FRASE` varchar(200) NOT NULL COMMENT 'Frase que se utiliza para calcular el Hash_code',
+  `DIAS_INVALIDA` int(10) unsigned NOT NULL DEFAULT '7' COMMENT 'Dias que puede estar sin actualizarse la licencia',
+  `PARAM_1` varchar(200) DEFAULT NULL COMMENT 'Parametro libre 1',
+  `PARAM_2` varchar(200) DEFAULT NULL COMMENT 'Parametro libre 2',
+  `PARAM_3` varchar(200) DEFAULT NULL COMMENT 'Parametro libre 3',
+  `PARAM_4` varchar(200) DEFAULT NULL COMMENT 'Parametro libre 4',
+  `PARAM_5` varchar(200) DEFAULT NULL COMMENT 'Parametro libre 5',
+  PRIMARY KEY (`ID_LICENCIA`),
+  KEY `fk_APPEX_LICENCIA_1` (`ID_DISTRIBUIDOR`),
+  CONSTRAINT `fk_APPEX_LICENCIA_1` FOREIGN KEY (`ID_DISTRIBUIDOR`) REFERENCES `APPEX_DISTRIBUIDORES` (`ID_DISTRIBUIDOR`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Licencias de uso del software';
+
+CREATE TABLE `APPEX_LICENCIA_ITEMS` (
+  `ID_LICENCIA` int(10) unsigned NOT NULL COMMENT 'Id. de la licencia',
+  `ID_ITEM` varchar(100) NOT NULL COMMENT 'Id. del item de licencia',
+  `NOMBRE` varchar(200) NOT NULL COMMENT 'Descripcion',
+  `TIPO` char(1) NOT NULL COMMENT 'Tipo: I - Entero, S - Cadena, D - Fecha, N - Indefinido\n',
+  `IMPORTE` double NOT NULL COMMENT 'Coste del item',
+  `IMP_TIPO` char(1) NOT NULL COMMENT 'Tipo de cobro: M - Mensual, T - Trimestral, S - Semestral, A - Anual, U - Pago único',
+  `ACTIVO` bit(1) NOT NULL COMMENT 'Indica si esta activo',
+  `INT_VALOR` int(11) DEFAULT NULL COMMENT 'Valor entero',
+  `INT_ACTUAL` int(11) DEFAULT NULL COMMENT 'Valor entero actual',
+  `STR_VALOR` varchar(200) DEFAULT NULL COMMENT 'Valor de cadena',
+  `STR_ACTUAL` varchar(200) DEFAULT NULL COMMENT 'Valor de cadena real',
+  `DATE_VALOR` datetime DEFAULT NULL COMMENT 'Valor de fecha',
+  `DATE_ACTUAL` datetime DEFAULT NULL COMMENT 'Valor de fecha actual',
+  PRIMARY KEY (`ID_LICENCIA`,`ID_ITEM`),
+  KEY `fk_APPEX_LICENCIA_ITEMS_1` (`ID_LICENCIA`),
+  CONSTRAINT `fk_APPEX_LICENCIA_ITEMS_1` FOREIGN KEY (`ID_LICENCIA`) REFERENCES `APPEX_LICENCIA` (`ID_LICENCIA`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Items de la licencia';
+
+
+

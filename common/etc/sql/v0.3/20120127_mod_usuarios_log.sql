@@ -1,0 +1,16 @@
+INSERT INTO `APPBS_USUARIOS_LOG_LEGEND` (`ID_TIPO`, `NOMBRE`, `TEXTO`) VALUES ('300', 'Inicio de sesión', 'El usuario se ha conectado');
+INSERT INTO `APPBS_USUARIOS_LOG_LEGEND` (`ID_TIPO`, `NOMBRE`, `TEXTO`) VALUES ('301', 'Cierre de sessión', 'El usuario se ha desconectado');
+INSERT INTO `APPBS_USUARIOS_LOG_LEGEND` (`ID_TIPO`, `NOMBRE`, `TEXTO`) VALUES ('500', 'Dirección - Cargar', 'Carga la dirección: $1, Tabla: $2');
+INSERT INTO `APPBS_USUARIOS_LOG_LEGEND` (`ID_TIPO`, `NOMBRE`, `TEXTO`) VALUES ('501', 'Dirección - Modificar', 'Modifica la dirección: $1, Tabla: $2, Operación: $3');
+INSERT INTO `APPBS_USUARIOS_LOG_LEGEND` (`ID_TIPO`, `NOMBRE`, `TEXTO`) VALUES ('510', 'Cuenta bancaria - Cargar', 'Carga la cuenta bancaria: $1, Tabla: $2');
+INSERT INTO `APPBS_USUARIOS_LOG_LEGEND` (`ID_TIPO`, `NOMBRE`, `TEXTO`) VALUES ('511', 'Cuenta bancaria - Modificar', 'Modifica la cuenta bancaria: $1, Tabla: $2, Operación: $3');
+DELETE FROM `APPBS_USUARIOS_LOG` WHERE `ID_TIPO`='200';
+DELETE FROM `APPBS_USUARIOS_LOG_LEGEND` WHERE `ID_TIPO`='200';
+INSERT INTO `APPBS_USUARIOS_LOG_LEGEND` (`ID_TIPO`, `NOMBRE`, `TEXTO`) VALUES ('520', 'IVA - Listar', 'Lista el I.V.A');
+INSERT INTO `APPBS_USUARIOS_LOG_LEGEND` (`ID_TIPO`, `NOMBRE`, `TEXTO`) VALUES ('521', 'IVA - Modificar', 'Modifica el I.V.A.: $1, Operación: $2');
+UPDATE `APPBS_USUARIOS_LOG_LEGEND` SET `NOMBRE`='Direcciones - Cargar ' WHERE `ID_TIPO`='500';
+UPDATE `APPBS_USUARIOS_LOG_LEGEND` SET `NOMBRE`='Direcciones - Modificar' WHERE `ID_TIPO`='501';
+UPDATE `APPBS_USUARIOS_LOG_LEGEND` SET `NOMBRE`='Cuenta bancaria - Cargar' WHERE `ID_TIPO`='510';
+UPDATE `APPBS_USUARIOS_LOG_LEGEND` SET `NOMBRE`='Cuenta bancaria - Modificar' WHERE `ID_TIPO`='511';
+INSERT INTO `APPBS_USUARIOS_LOG_LEGEND` (`ID_TIPO`, `NOMBRE`, `TEXTO`) VALUES ('530', 'Contactos - Cargar', 'Carga el contacto: $1, Tabla: $2');
+INSERT INTO `APPBS_USUARIOS_LOG_LEGEND` (`ID_TIPO`, `NOMBRE`, `TEXTO`) VALUES ('531', 'Contactos - Modificar', 'Modifica el contacto: $1, Operación: $2, Tabla: $3');
